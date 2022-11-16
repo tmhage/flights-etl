@@ -1,0 +1,20 @@
+version: '2'
+services:
+  app:
+    build: app
+    environment:
+      - MAX_RECORDS=500
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres_container
+    depends_on:
+      - db
+  db:
+    container_name: postgres_container
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
